@@ -17,7 +17,7 @@ ajaxApi = [
  ['Афганистан', 'Кабул'],
  ['Антигуа и Барбуда', 'Сент-Джонс'],
  ['Ангилья', 'Валли'],
- /* ['Албания', 'Тирана'],
+ ['Албания', 'Тирана'],
  ['Армения', 'Ереван'],
  ['Ангола', 'Луанда'],
  ['Аргентина', 'Буэнос-Айрес'],
@@ -210,7 +210,7 @@ ajaxApi = [
  ['Йемен', 'Сана'],
  ['ЮАР', 'Претория'],
  ['Замбия', 'Лусака'],
- ['Зимбабве', 'Хараре'], */
+ ['Зимбабве', 'Хараре'],
 ];
 
 country = document.querySelector('h1');
@@ -218,8 +218,7 @@ capitals = document.querySelectorAll('.input');
 radio = document.querySelectorAll('.form-control');
 okButton = document.querySelector('#OK')
 nextButton = document.querySelector('#next')
-var countries = ajaxApi.slice();
-
+countries = ajaxApi.slice();
 
 startCard();
 
@@ -229,48 +228,36 @@ function startCard() {
   nextButton.disabled = true;
   country.style.color = 'rgb(0, 0, 0)'
   rndCountryPick = Math.round(Math.random() * 3);
+
  } else getFinalResult();
 
  setRandomCountries();
+ country.innerHTML = countries[randomCountryIndex][0];
 
  for (let i = 0; i < 4; i++) {
   radio[i].checked = false;
   radioCheck[i] = '';
+  setRandomCapitals(i)
+  capitals[i].innerHTML = activeQuestCard[i].toUpperCase();
  }
- setCardData();
 }
 
 function setRandomCountries() {
  randomCountryIndex = (Math.round(Math.random() * (countries.length - 1)));
  if (answeredCountries.includes(randomCountryIndex) == true)
   setRandomCountries();
- else {
-  randomCountry = (countries[randomCountryIndex][0]);
-  country.innerHTML = countries[randomCountryIndex][0];
- }
-}
-
-function setCardData() {
- for (let i = 0; i < 4; i++) {
-  setRandomCapitals(i)
-  capitals[i].innerHTML = activeQuestCard[i];
- }
+ else randomCountry = (countries[randomCountryIndex][0]);
 }
 
 function setRandomCapitals(i) {
-
- const tempRandomCapital = (countries[(Math.round(Math.random() * (countries.length - 1)))][1].toUpperCase());
- console.log('i: ', i);
-
- if (activeQuestCard.includes(tempRandomCapital) == true)
-
-  setRandomCapitals(i);
+ const tempRandomCapital = countries[Math.round(Math.random() * (countries.length - 1))][1];
+ if (i == rndCountryPick) activeQuestCard[i] = (countries[randomCountryIndex][1]);
  else {
-  activeQuestCard[i] = tempRandomCapital;
-  console.log('activeQuestCard: ', activeQuestCard);
-
+  if ((activeQuestCard.includes(tempRandomCapital) == true) || (tempRandomCapital == countries[randomCountryIndex][1])) setRandomCapitals(i);
+  else activeQuestCard[i] = tempRandomCapital;
  }
 }
+
 
 function checkInput() {
  okButton.disabled = true;
@@ -281,10 +268,7 @@ function checkInput() {
   radioCheck[i] = radio[i].checked;
   if (radioCheck[i] == true) correctRadio = i;
  }
- console.log('activeQuestCard[correctRadio] : ', activeQuestCard[correctRadio]);
- console.log('activeQuestCard[rndCountryPick]: ', activeQuestCard[rndCountryPick]);
  if (activeQuestCard[correctRadio] == activeQuestCard[rndCountryPick])
-
   country.style.color = 'rgb(0, 255, 0)';
  else {
   country.style.color = 'rgb(255, 0, 0)';
@@ -300,9 +284,6 @@ function getFinalResult() {
  document.querySelector('#res1').innerHTML = 'Всего: ' + countries.length;
  document.querySelector('#res2').innerHTML = 'Верно: ' + (countries.length - errors.length);
  document.querySelector('#res3').innerHTML = 'Не верно: ' + errors.length;
- console.log('answeredCountry: ', answeredCountries.length);
- console.log('errors: ', errors.length);
- console.log('total', countries.length);
  /*  alert('Нажмите, чтобы пройти еще раз'); */
  /* location.reload(); */
 }
