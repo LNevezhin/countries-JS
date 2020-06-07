@@ -4,9 +4,30 @@ div {
 
 #empty {
  color: white;
- font-size: 75px;
+ font-size: 50px;
 }
 
 .form-control {
  outline: none;
 }
+
+h1 {
+ text-align: center;
+}
+
+#result {
+ position: absolute;
+ width: 250px;
+ height: 200px;
+ left: 40%;
+ top: 30%;
+ font-size: 25px;
+ z-index: 100;
+ background-color: chartreuse;
+ display: none;
+ border-radius: 20px;
+}
+
+/* #main {
+ display: block !important;
+} */

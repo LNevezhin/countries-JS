@@ -13,28 +13,41 @@
 
 <body>
  <div class="container">
+  <div id="result">
+   <ul>
+    <li id="res1">Результат</li>
+    <li id="res2">Правильно</li>
+    <li id="res3">Не правильно</li>
+   </ul>
+  </div>
   <div id="main">
+
    <div>
     <div id="empty">пустота</div>
     <h1>Страна</h1>
     <div id="empty">пустота</div>
-    <div class="row"><input type="radio" class="form-control col-1" name="radio" value="0"></input>
+    <div class="row justify-content-center"><input type="radio" class="form-control col-1 offset-3" name="radio"
+      value="0"></input>
      <div class="input col-4" id="input0"></div>
     </div>
-    <div class="row"><input type="radio" class="form-control col-1" name="radio" value="1"></input>
+    <div class="row justify-content-center"><input type="radio" class="form-control col-1 offset-3" name="radio"
+      value="1"></input>
      <div class="input col-4" id="input1"></div>
     </div>
-    <div class="row"><input type="radio" class="form-control col-1" name="radio" value="2"></input>
+    <div class="row justify-content-center"><input type="radio" class="form-control col-1 offset-3" name="radio"
+      value="2"></input>
      <div class="input col-4" id="input2"></div>
     </div>
-    <div class="row"><input type="radio" class="form-control col-1" name="radio" value="3"></input>
+    <div class="row justify-content-center"><input type="radio" class="form-control col-1 offset-3" name="radio"
+      value="3"></input>
      <div class="input col-4" id="input3"></div>
     </div>
     <div id="empty">пустота</div>
    </div>
-   <button id="OK" type="button" class="btn btn-secondary" onclick="checkInput()">ОК</button>
-
-   <button id="next" type="button" class="btn btn-secondary" onclick="startCard()">Далее</button>
+   <div class="row justify-content-center">
+    <button id="OK" type="button" class="btn btn-secondary" onclick="checkInput()">ОК</button>
+    <button id="next" type="button" class="btn btn-secondary" onclick="startCard()">Далее</button>
+   </div>
   </div>
  </div>
  </div>

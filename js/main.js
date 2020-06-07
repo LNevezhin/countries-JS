@@ -1,21 +1,16 @@
-randomCountry = [];
+randomCountry = 0;
 rndCountryPick = 0;
 value = '';
 activeQuestCard = [];
 answeredCountries = [];
 radio = [];
 radioCheck = [];
-nextStatusButton = false;
 activeCard = 0;
-randomCountryIndex = [];
-country = 0;
-capital = [];
-tag = 0;
-inputStatus = [];
+randomCountryIndex = 0;
 radioCheck = [];
-answeredCountry = [];
 errors = [];
 okButton = 0;
+correctRadio = 0;
 ajaxApi = [
  ['Андорра', 'Андорра-ла-Велья'],
  ['ОАЭ', 'Абу-Даби'],
@@ -35,7 +30,7 @@ ajaxApi = [
  ['Бельгия', 'Брюссель'],
  ['Буркина Фасо', 'Уагадугу'],
  ['Болгария', 'София'],
- /* ['Бахрейн', 'Манама'],
+ ['Бахрейн', 'Манама'],
  ['Бурунди', 'Бужумбура'],
  ['Бенин', 'Порто-Ново'],
  ['Бермудские о-ва', 'Гамильтон'],
@@ -212,7 +207,7 @@ ajaxApi = [
  ['Вьетнам', 'Ханой'],
  ['Вануату', 'Порт-Вила'],
  ['Самоа', 'Апиа'],
- ['Йемен', 'Сана'], */
+ ['Йемен', 'Сана'],
  ['ЮАР', 'Претория'],
  ['Замбия', 'Лусака'],
  ['Зимбабве', 'Хараре'],
@@ -226,38 +221,41 @@ nextButton = document.querySelector('#next')
 var countries = ajaxApi.slice();
 
 
-
 startCard();
 
 function startCard() {
- okButton.disabled = false;
- nextButton.disabled = true;
- country.style.color = 'rgb(0, 0, 0)'
- rndCountryPick = Math.round(Math.random() * 3);
+ if (answeredCountries.length != countries.length - 1) {
+  okButton.disabled = false;
+  nextButton.disabled = true;
+  country.style.color = 'rgb(0, 0, 0)'
+  rndCountryPick = Math.round(Math.random() * 3);
+ } else getFinalResult();
+
+ setRandomCountries();
 
  for (let i = 0; i < 4; i++) {
   radio[i].checked = false;
   radioCheck[i] = '';
-  setRandomCountries(i);
  }
  setCardData();
 }
 
-function setRandomCountries(i) {
- randomCountryIndex[i] = (Math.round(Math.random() * (countries.length - 1)));
-
- if (answeredCountry.includes(randomCountryIndex[i]) == true || activeQuestCard.includes(countries[randomCountryIndex[i]][1].toUpperCase()) == true) {
-  setRandomCountries(i);
- } else {
-  activeQuestCard[i] = (countries[randomCountryIndex[i]][1].toUpperCase());
-  randomCountry[i] = (countries[randomCountryIndex[i]][0]);
-
+function setRandomCountries() {
+ randomCountryIndex = (Math.round(Math.random() * (countries.length - 1)));
+ if (answeredCountries.includes(randomCountryIndex) == true)
+  setRandomCountries();
+ else {
+  randomCountry = (countries[randomCountryIndex][0]);
  }
 }
 
 function setCardData() {
  for (let i = 0; i < 4; i++) {
-  country.innerHTML = randomCountry[rndCountryPick];
+  if (i == rndCountryPick) activeQuestCard[i] = (countries[randomCountryIndex][1].toUpperCase());
+  else {
+   activeQuestCard[i] = (countries[(Math.round(Math.random() * (countries.length - 1)))][1].toUpperCase());
+  }
+  country.innerHTML = countries[randomCountryIndex][0];
   capitals[i].innerHTML = activeQuestCard[i];
  }
 }
@@ -265,19 +263,34 @@ function setCardData() {
 function checkInput() {
  okButton.disabled = true;
  nextButton.disabled = false;
-
- answeredCountry.push([randomCountryIndex[rndCountryPick]][0]);
- console.log('answeredCountry: ', answeredCountry);
+ answeredCountries.push([randomCountryIndex][0]);
 
  for (let i = 0; i < 4; i++) {
   radioCheck[i] = radio[i].checked;
+  if (radioCheck[i] == true) correctRadio = i;
  }
- if (radioCheck[rndCountryPick] == true) {
-  country.style.color = 'rgb(0, 255, 0)';
+ console.log('activeQuestCard[correctRadio] : ', activeQuestCard[correctRadio]);
+ console.log('activeQuestCard[rndCountryPick]: ', activeQuestCard[rndCountryPick]);
+ if (activeQuestCard[correctRadio] == activeQuestCard[rndCountryPick])
 
- } else {
+  country.style.color = 'rgb(0, 255, 0)';
+ else {
   country.style.color = 'rgb(255, 0, 0)';
-  errors.push([randomCountryIndex[rndCountryPick]][0]);
-  console.log('errors: ', errors);
+  errors.push([randomCountryIndex][0]);
  }
-};
+}
+
+function getFinalResult() {
+ okButton.disabled = true;
+ nextButton.disabled = true;
+ document.querySelector('#result').style.display = 'block'
+ document.querySelector('#main').hidden = !document.querySelector('#main').hidden
+ document.querySelector('#res1').innerHTML = 'Всего: ' + countries.length;
+ document.querySelector('#res2').innerHTML = 'Верно: ' + (countries.length - errors.length);
+ document.querySelector('#res3').innerHTML = 'Не верно: ' + errors.length;
+ console.log('answeredCountry: ', answeredCountries.length);
+ console.log('errors: ', errors.length);
+ console.log('total', countries.length);
+ /*  alert('Нажмите, чтобы пройти еще раз'); */
+ /* location.reload(); */
+}
