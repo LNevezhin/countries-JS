@@ -1,0 +1,12 @@
+div {
+ user-select: none;
+}
+
+#empty {
+ color: white;
+ font-size: 75px;
+}
+
+.form-control {
+ outline: none;
+}
