@@ -17,7 +17,7 @@ ajaxApi = [
  ['Афганистан', 'Кабул'],
  ['Антигуа и Барбуда', 'Сент-Джонс'],
  ['Ангилья', 'Валли'],
- ['Албания', 'Тирана'],
+ /* ['Албания', 'Тирана'],
  ['Армения', 'Ереван'],
  ['Ангола', 'Луанда'],
  ['Аргентина', 'Буэнос-Айрес'],
@@ -210,7 +210,7 @@ ajaxApi = [
  ['Йемен', 'Сана'],
  ['ЮАР', 'Претория'],
  ['Замбия', 'Лусака'],
- ['Зимбабве', 'Хараре'],
+ ['Зимбабве', 'Хараре'], */
 ];
 
 country = document.querySelector('h1');
@@ -246,17 +246,29 @@ function setRandomCountries() {
   setRandomCountries();
  else {
   randomCountry = (countries[randomCountryIndex][0]);
+  country.innerHTML = countries[randomCountryIndex][0];
  }
 }
 
 function setCardData() {
  for (let i = 0; i < 4; i++) {
-  if (i == rndCountryPick) activeQuestCard[i] = (countries[randomCountryIndex][1].toUpperCase());
-  else {
-   activeQuestCard[i] = (countries[(Math.round(Math.random() * (countries.length - 1)))][1].toUpperCase());
-  }
-  country.innerHTML = countries[randomCountryIndex][0];
+  setRandomCapitals(i)
   capitals[i].innerHTML = activeQuestCard[i];
+ }
+}
+
+function setRandomCapitals(i) {
+
+ const tempRandomCapital = (countries[(Math.round(Math.random() * (countries.length - 1)))][1].toUpperCase());
+ console.log('i: ', i);
+
+ if (activeQuestCard.includes(tempRandomCapital) == true)
+
+  setRandomCapitals(i);
+ else {
+  activeQuestCard[i] = tempRandomCapital;
+  console.log('activeQuestCard: ', activeQuestCard);
+
  }
 }
 
