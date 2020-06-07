@@ -221,9 +221,12 @@ countries = ajaxApi.slice();
 answeredCountries = [];
 
 function correctErrors() {
+ document.querySelector('#result').style.display = 'none'
+ document.querySelector('#main').style.display = 'block'
  countries = [];
  answeredCountries = [];
  activeQuestCard = [];
+
  for (i = 0; i < errors.length; i++) {
   countries[i] = ajaxApi[errors[i]];
  }
@@ -241,8 +244,8 @@ nextButton = function () {
 startCard();
 
 function startCard() {
- okButton.disabled = false;
- nextButton.disabled = true;
+ document.querySelector('#OK').disabled = false;
+ document.querySelector('#next').disabled = true;
  country.style.color = 'rgb(0, 0, 0)'
  rndCountryPick = Math.round(Math.random() * 3);
 
@@ -261,27 +264,34 @@ function setRandomCountries() {
 
  randomCountryIndex = (Math.round(Math.random() * (countries.length - 1)));
 
- if (answeredCountries.includes(randomCountryIndex) == true)
+ if (answeredCountries.includes(randomCountryIndex) == true) {
+
+
   setRandomCountries();
- else randomCountry = (countries[randomCountryIndex][0]);
+ } else randomCountry = (countries[randomCountryIndex][0]);
 }
 
 function setRandomCapitals(i) {
  let tempRandomCapital = ajaxApi[Math.round(Math.random() * (ajaxApi.length - 1))][1];
  if (i == rndCountryPick) {
-  activeQuestCard[i] = (ajaxApi[randomCountryIndex][1]);
+  console.log('rndCountryPick: ', rndCountryPick);
+  activeQuestCard[i] = countries[randomCountryIndex][1];
+
+  console.log('randomCountryIndex: ', randomCountryIndex);
+  console.log('ajaxApi[randomCountryIndex][0]: ', ajaxApi[randomCountryIndex][0]);
+  console.log('ajaxApi[randomCountryIndex][1]: ', ajaxApi[randomCountryIndex][1]);
+  console.log('activeQuestCard[i]: ', activeQuestCard[i]);
 
  } else {
-  if ((activeQuestCard.includes(tempRandomCapital) == true) || (tempRandomCapital == ajaxApi[randomCountryIndex][1])) setRandomCapitals(i);
+  if ((activeQuestCard.includes(tempRandomCapital) == true) || (tempRandomCapital == countries[randomCountryIndex][1])) setRandomCapitals(i);
   else activeQuestCard[i] = tempRandomCapital;
+
  }
- console.log('activeQuestCard: ', activeQuestCard);
- console.log(countries);
 }
 
 function checkInput() {
- okButton.disabled = true;
- nextButton.disabled = false;
+ document.querySelector('#OK').disabled = true;
+ document.querySelector('#next').disabled = false;
  answeredCountries.push([randomCountryIndex][0]);
 
  for (let i = 0; i < 4; i++) {
@@ -297,13 +307,14 @@ function checkInput() {
 }
 
 function getFinalResult() {
- okButton.disabled = true;
- nextButton.disabled = true;
+ document.querySelector('#OK').disabled = true;
+ document.querySelector('#next').disabled = true;
  document.querySelector('#result').style.display = 'block'
- document.querySelector('#main').hidden = !document.querySelector('#main').hidden
+ document.querySelector('#main').style.display = 'none'
  document.querySelector('#res1').innerHTML = 'Всего: ' + countries.length;
  document.querySelector('#res2').innerHTML = 'Верно: ' + (countries.length - errors.length);
  document.querySelector('#res3').innerHTML = 'Не верно: ' + errors.length;
+ if (errors.length == 0) document.querySelector('#correctErrors').style.display = 'none'
 }
 
 function startNew() {

@@ -19,8 +19,9 @@
     <li id="res2">Правильно</li>
     <li id="res3">Не правильно</li>
     <div class="row justify-content-center">
-     <button type="button" class="btn btn-secondary" onclick="correctErrors()">Исправить ошибки</button>
-     <button type="button" class="btn btn-secondary" onclick="startNew()">Начать сначала</button>
+     <button id="correctErrors" type="button" class="btn btn-secondary" onclick="correctErrors()">Исправить
+      ошибки</button>
+     <button id="startNew" type="button" class="btn btn-secondary" onclick="startNew()">Начать сначала</button>
     </div>
    </ul>
   </div>
@@ -50,12 +51,17 @@
    </div>
    <div class="row justify-content-center">
     <button id="OK" type="button" class="btn btn-secondary" onclick="checkInput()">ОК</button>
-    <button:disabled id="next" type="button" class="btn btn-secondary" onclick="nextButton()">Далее</button:disabled>
+    <button id="next" type="button" class="btn btn-secondary" onclick="nextButton()">Далее</button>
    </div>
   </div>
  </div>
  </div>
  <script src="./js/main.js"></script>
 </body>
+
+<!-- <script>
+ document.querySelector('#OK').disabled = true;
+ document.querySelector('#next').disabled = true;
+</script> -->
 
 </html>
