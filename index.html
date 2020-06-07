@@ -18,6 +18,10 @@
     <li id="res1">Результат</li>
     <li id="res2">Правильно</li>
     <li id="res3">Не правильно</li>
+    <div class="row justify-content-center">
+     <button type="button" class="btn btn-secondary" onclick="correctErrors()">Исправить ошибки</button>
+     <button type="button" class="btn btn-secondary" onclick="startNew()">Начать сначала</button>
+    </div>
    </ul>
   </div>
   <div id="main">
@@ -46,7 +50,7 @@
    </div>
    <div class="row justify-content-center">
     <button id="OK" type="button" class="btn btn-secondary" onclick="checkInput()">ОК</button>
-    <button id="next" type="button" class="btn btn-secondary" onclick="startCard()">Далее</button>
+    <button:disabled id="next" type="button" class="btn btn-secondary" onclick="nextButton()">Далее</button:disabled>
    </div>
   </div>
  </div>
