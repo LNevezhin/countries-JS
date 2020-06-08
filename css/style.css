@@ -2,28 +2,15 @@ div {
  user-select: none;
 }
 
-#empty {
- color: white;
- font-size: 50px;
-}
-
-/* .form-control {
- outline: none;
-} */
-
-h1 {
- text-align: center;
-}
-
 #result {
- position: absolute;
- width: 250px;
- height: 200px;
- left: 40%;
- top: 30%;
- font-size: 25px;
- z-index: 100;
- background-color: chartreuse;
  display: none;
- border-radius: 20px;
+}
+
+body {
+ background-image: url(../src/2682040.jpg);
+ background-size: cover;
+}
+
+#main {
+ display: block;
 }
