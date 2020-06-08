@@ -212,7 +212,7 @@ capitals = document.querySelectorAll('.input');
 countries = ajaxApi.slice();
 answeredCountries = [];
 
-function correctErrors() {
+correctErrors = function () {
  document.querySelector('#result').style.display = 'none'
  document.querySelector('#main').style.display = 'block'
  countries = [];
@@ -226,7 +226,8 @@ function correctErrors() {
  console.log(countries);
  errors = [];
  nextButton();
-}
+};
+
 nextButton = function () {
  if (answeredCountries.length == countries.length) setTimeout(() => getFinalResult(), 500);
  else
@@ -237,9 +238,8 @@ nextButton = function () {
 startCard();
 
 function startCard() {
- document.querySelector('#OK').disabled = false;
+ /*  document.querySelector('#OK').disabled = false; */
  document.querySelector('#next').disabled = true;
- country.style.color = 'rgb(0, 0, 0)'
  rndCountryPick = Math.round(Math.random() * 3);
 
  setRandomCountries();
@@ -247,6 +247,7 @@ function startCard() {
 
  for (let i = 0; i < 4; i++) {
   setRandomCapitals(i)
+  capitals[i].style.color = 'rgb(0, 0, 0)'
   capitals[i].innerHTML = activeQuestCard[i].toUpperCase();
  }
 }
@@ -269,32 +270,33 @@ function setRandomCapitals(i) {
 checkButton = (btn) => {
  value = (btn.value);
  console.log(value);
- alert(value);
+ checkInput();
 }
 
 function checkInput() {
- document.querySelector('#OK').disabled = true;
+ /*  document.querySelector('#OK').disabled = true; */
  document.querySelector('#next').disabled = false;
  answeredCountries.push([randomCountryIndex][0]);
 
- if (value == rndCountryPick)
-  country.style.color = 'rgb(0, 255, 0)';
- else {
-  country.style.color = 'rgb(255, 0, 0)';
+ if (value == rndCountryPick) {
+  capitals[value].style.color = 'rgb(0, 255, 0)'
+ } else {
+  capitals[value].style.color = 'rgb(255, 0, 0)'
+  capitals[rndCountryPick].style.color = 'rgb(0, 255, 0)'
+
   errors.push([randomCountryIndex][0]);
  }
 }
 
-
 function getFinalResult() {
- document.querySelector('#OK').disabled = true;
+ /*  document.querySelector('#OK').disabled = true; */
  document.querySelector('#next').disabled = true;
  document.querySelector('#result').style.display = 'block'
  document.querySelector('#main').style.display = 'none'
- document.querySelector('#res1').innerHTML = 'Всего: ' + countries.length;
- document.querySelector('#res2').innerHTML = 'Верно: ' + (countries.length - errors.length);
- document.querySelector('#res3').innerHTML = 'Не верно: ' + errors.length;
- if (errors.length == 0) document.querySelector('#correctErrors').style.display = 'none'
+ document.querySelector('#res1').innerHTML = 'Верно:     ' + (countries.length - errors.length);
+ document.querySelector('#res2').innerHTML = 'Не верно:  ' + errors.length;
+ document.querySelector('#res3').innerHTML = 'Всего:     ' + countries.length;
+ if (errors.length == 0) document.querySelector('#correct').style.display = 'none'
 }
 
 function startNew() {
