@@ -214,15 +214,15 @@ countries = ajaxApi.slice();
 
 correctErrors = function () {
   countCard = 0;
-  document.querySelector('#result').style.display = 'none'
-  document.querySelector('#main').style.display = 'block'
+  document.querySelector('#result').style.display = 'none';
+  document.querySelector('#main').style.display = 'block';
   countries.splice(0, countries.length);
   answeredCountries.splice(0, answeredCountries.length);
   activeQuestCard.splice(0, activeQuestCard.length);
   let i = 0;
   do {
     countries[i] = ajaxApi[errors[i]];
-    i++
+    i++;
   }
   while (i < errors.length);
   errors.splice(0, errors.length);
@@ -231,8 +231,7 @@ correctErrors = function () {
 
 nextButton = function () {
   if (answeredCountries.length == countries.length) setTimeout(() => getFinalResult(), 400);
-  else
-    startCard();
+  else startCard();
 }
 
 startCard();
@@ -247,7 +246,7 @@ function startCard() {
   setRandomCountries();
 
   for (let i = 0; i < 4; i++) {
-    setRandomCapitals(i)
+    setRandomCapitals(i);
     capitals[i].disabled = false;
     capitals[i].className = "form-control input";
     capitals[i].innerHTML = activeQuestCard[i].toUpperCase();
@@ -257,10 +256,8 @@ function startCard() {
 function setRandomCountries() {
   randomCountryIndex = (Math.round(Math.random() * (countries.length - 1)));
   if (answeredCountries.includes(ajaxApi.indexOf(countries[randomCountryIndex])) == true) setRandomCountries();
-  else {
-    country.innerHTML = countries[randomCountryIndex][0];
-  }
-}
+  else country.innerHTML = countries[randomCountryIndex][0];
+};
 
 function setRandomCapitals(i) {
   let tempRandomCapital = ajaxApi[Math.round(Math.random() * (ajaxApi.length - 1))][1];
@@ -299,7 +296,7 @@ function getFinalResult() {
   document.querySelector('#res1').innerHTML = 'Верно:     ' + (countries.length - errors.length);
   document.querySelector('#res2').innerHTML = 'Не верно:  ' + errors.length;
   document.querySelector('#res3').innerHTML = 'Всего:     ' + countries.length;
-  if (errors.length == 0) document.querySelector('#correct').style.display = 'none'
+  if (errors.length == 0) document.querySelector('#correct').style.display = 'none';
 }
 
 function startNew() {
