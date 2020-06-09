@@ -2,13 +2,13 @@ div {
  user-select: none;
 }
 
-#result {
- display: none;
-}
-
 body {
  background-image: url(../src/2682040.jpg);
  background-size: cover;
+}
+
+#result {
+ display: none;
 }
 
 #main {
@@ -22,14 +22,6 @@ body {
  color: black;
  text-align: center;
  padding: 4px 20px;
-
-}
-
-.input {
- font-size: 1rem;
- font-weight: 600;
- font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
- padding: 3px 12px
 }
 
 .info {
@@ -43,11 +35,34 @@ body {
 }
 
 .is-valid {
- border: 3px solid;
  border-color: rgb(40, 167, 69);
 }
 
 .is-invalid {
- border: 3px solid;
  border-color: rgb(220, 53, 69);
+}
+
+.input:diabled {
+ border-color: #e9ecef;
+}
+
+.input,
+.is-valid,
+.is-invalid,
+.input:diabled {
+ font-size: 1rem;
+ font-weight: 600;
+ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ margin: 0;
+ padding: 2px 10px;
+ border: 2px solid;
+}
+
+#count {
+ font-size: 0.8rem;
+ font-weight: bold;
+ font-family: Georgia, 'Times New Roman', Times, serif;
+ color: black;
+ text-align: center;
+ padding: 1px 10px;
 }

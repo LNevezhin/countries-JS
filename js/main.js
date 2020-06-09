@@ -208,11 +208,12 @@ ajaxApi = [
 
 country = document.querySelector('#country');
 capitals = document.querySelectorAll('.input');
+count = document.querySelector('#count')
+countCard = 0;
 countries = ajaxApi.slice();
 
 correctErrors = function () {
-  console.log('___________________________________________');
-  console.log('countries: ', countries);
+  countCard = 0;
   document.querySelector('#result').style.display = 'none'
   document.querySelector('#main').style.display = 'block'
   countries.splice(0, countries.length);
@@ -234,10 +235,12 @@ nextButton = function () {
     startCard();
 }
 
-
 startCard();
 
 function startCard() {
+  count.innerHTML = (countCard + 1) + '  из  ' + countries.length;
+  countCard++;
+
   document.querySelector('#next').disabled = true;
   rndCountryPick = Math.round(Math.random() * 3);
 

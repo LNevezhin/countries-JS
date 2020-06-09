@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <link rel=«apple-touch-icon» href="src/countries.png">
+  <link rel="apple-touch-icon" href="src/countries.png">
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -16,7 +16,7 @@
 <body>
   <div class="container-fluid">
     <form id="result">
-      <div class="form-row justify-content-center mt-5">
+      <div class="form-row justify-content-center mt-4">
         <div id="res1" class="col-2 alert alert-success nav justify-content-center info"></div>
       </div>
       <div class="form-row justify-content-center mt-1">
@@ -25,7 +25,7 @@
       <div class="form-row justify-content-center mt-1">
         <div id="res3" class="col-2 alert alert-dark nav justify-content-center info">Всего:</div>
       </div>
-      <div class="form-row justify-content-center mt-5">
+      <div class="form-row justify-content-center mt-4">
         <div class="col-auto nav justify-content-center"><button id="correct" type="button"
             class="form-control btn btn-secondary" onclick="correctErrors()">Исправить</button></div>
         <div class="col-auto nav justify-content-center"><button id="start" type="button"
@@ -34,14 +34,14 @@
       </div>
 
     </form>
-
     <form id="main">
-
-      <div class="form-row justify-content-center mt-5">
+      <div class="form-row justify-content-center mt-4">
         <div id="country" class="col-auto alert alert-primary nav justify-content-center"></div>
       </div>
-
-      <div class="form-row justify-content-center mt-5">
+      <div class="form-row justify-content-center mt-1">
+        <div id="count" class="col-auto alert alert-primary nav justify-content-center"></div>
+      </div>
+      <div class="form-row justify-content-center mt-2">
         <div class="col-3 col-sm-auto mt-3">
           <button type="button" class="form-control input" id="" value="0" required
             onclick="checkButton(this)"></button>
@@ -51,33 +51,21 @@
         <div class="col-3 col-sm-auto mt-3">
           <button type="button" class="form-control input" id="" value="1" required
             onclick="checkButton(this)"></button>
-          <div class=" valid-feedback">
-          </div>
-          <div class="invalid-feedback">
-          </div>
         </div>
       </div>
       <div class="form-row justify-content-center">
         <div class="col-3 col-sm-auto mt-3">
           <button type="button" class="form-control input" id="" value="2" required
             onclick="checkButton(this)"></button>
-          <div class="valid-feedback">
-          </div>
-          <div class="invalid-feedback">
-          </div>
         </div>
       </div>
       <div class="form-row justify-content-center">
         <div class="col-3 col-sm-auto mt-3">
           <button type="button" class="form-control input" id="" value="3" required
             onclick="checkButton(this)"></button>
-          <div class="valid-feedback">
-          </div>
-          <div class="invalid-feedback">
-          </div>
         </div>
       </div>
-      <div class="form-row justify-content-center mt-3">
+      <div class="form-row justify-content-center mt-2">
         <div class="col-auto"><button id="next" type="button" class="form-control btn btn-secondary"
             onclick="nextButton()">Далее</button>
         </div>
