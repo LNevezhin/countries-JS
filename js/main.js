@@ -43,7 +43,7 @@ let testData = [
       ['Демократическая Республика Конго', 'Киншаса'],
       ['Центральная Африканская Республика', 'Банги'],
       ['Швейцария', 'Берн'],
-      ["Кот-д'Ивуар", 'Ямусукро'],
+      ["Кот-д'Ивуар", "Ямусукро"],
       ['Острова Кука', 'Аваруа'],
       ['Чили', 'Сантьяго'],
       ['Камерун', 'Яунде'],
@@ -365,7 +365,6 @@ let res2 = document.querySelector('#res2');
 let res3 = document.querySelector('#res3');
 let correct = document.querySelector('#correct');
 
-
 function setRandomCapitals(i) {
    let randomCapital = Math.round(Math.random() * (testData[test].length - 1));
    if (i === randomCountryPos) {
@@ -384,7 +383,7 @@ function startCard() {
    count.innerHTML = (countCard + 1) + '  из  ' + countriesLength;
    countCard += 1;
    next.style.display = 'none';
-   randomCountryPos = Math.round(Math.random() * 3);
+   randomCountryPos = parseInt(Math.round(Math.random() * 3));
    randomCountryIndex = (Math.round(Math.random() * (countries.length - 1)));
    country.innerHTML = testData[test][countries[randomCountryIndex]][mode];
    for (let i = 0; i < 4; i += 1) {
@@ -393,6 +392,22 @@ function startCard() {
       capitals[i].className = "form-control input";
       capitals[i].innerHTML = testData[test][activeQuestCard[i]][(-(mode - 1))];
    }
+}
+
+function checkInput(value) {
+   let checkValue = parseInt(value);
+   for (let i = 0; i < 4; i += 1) {
+      capitals[i].disabled = true;
+   }
+   if (checkValue === randomCountryPos) {
+      capitals[checkValue].className = "form-control input is-valid";
+   } else {
+      capitals[randomCountryPos].className = "form-control input is-valid";
+      capitals[checkValue].className = "form-control input is-invalid";
+      errors.push(countries[randomCountryIndex]);
+   }
+   countries.splice(randomCountryIndex, 1);
+   next.style.display = 'block';
 }
 
 function getFinalResult() {
@@ -447,18 +462,3 @@ nextButton = function () {
       startCard();
    }
 };
-
-function checkInput(value) {
-   for (let i = 0; i < 4; i += 1) {
-      capitals[i].disabled = true;
-   }
-   if (value === randomCountryPos) {
-      capitals[value].className = "form-control input is-valid";
-   } else {
-      capitals[randomCountryPos].className = "form-control input is-valid";
-      capitals[value].className = "form-control input is-invalid";
-      errors.push(countries[randomCountryIndex]);
-   }
-   countries.splice(randomCountryIndex, 1);
-   next.style.display = 'block';
-}
