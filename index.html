@@ -1,79 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
-  <link rel="apple-touch-icon" href="src/countries.png">
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <meta name="viewport" content="width=400, initial-scale=0.68 user-scalable=no" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+   <link rel="apple-touch-icon"
+         href="src/countries.png">
+   <meta charset="UTF-8" />
+   <link rel="stylesheet"
+         href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+         crossorigin="anonymous">
+   <meta name="viewport"
+         content="width=400, initial-scale=0.85 user-scalable=no" />
+   <link rel="stylesheet"
+         href="css/style.css" />
+   <link rel="shortcut icon"
+         href="favicon.ico"
+         type="image/x-icon" />
 
-  <title>Countries</title>
+   <title>Countries</title>
 </head>
 
 <body>
-  <div class="container-fluid">
-    <form id="result">
-      <div class="form-row justify-content-center mt-4">
-        <div id="res1" class="col-2 alert alert-success nav justify-content-center info"></div>
-      </div>
-      <div class="form-row justify-content-center mt-1">
-        <div id="res2" class="col-2 alert alert-danger nav justify-content-center info"></div>
-      </div>
-      <div class="form-row justify-content-center mt-1">
-        <div id="res3" class="col-2 alert alert-dark nav justify-content-center info">Всего:</div>
-      </div>
-      <div class="form-row justify-content-center mt-4">
-        <div class="col-auto nav justify-content-center"><button id="correct" type="button"
-            class="form-control btn btn-secondary" onclick="correctErrors()">Исправить</button></div>
-        <div class="col-auto nav justify-content-center"><button id="start" type="button"
-            class="form-control btn btn-secondary" onclick="startNew()">Cначала</button>
-        </div>
-      </div>
+   <div class="container-fluid">
 
-    </form>
-    <form id="main">
-      <div class="form-row justify-content-center mt-4">
-        <div id="country" class="col-auto alert alert-primary nav justify-content-center"></div>
-      </div>
-      <div class="form-row justify-content-center mt-1">
-        <div id="count" class="col-auto alert alert-primary nav justify-content-center"></div>
-      </div>
-      <div class="form-row justify-content-center mt-2">
-        <div class="col-3 col-sm-auto mt-3">
-          <button type="button" class="form-control input" id="" value="0" required
-            onclick="checkButton(this)"></button>
-        </div>
-      </div>
-      <div class="form-row justify-content-center">
-        <div class="col-3 col-sm-auto mt-3">
-          <button type="button" class="form-control input" id="" value="1" required
-            onclick="checkButton(this)"></button>
-        </div>
-      </div>
-      <div class="form-row justify-content-center">
-        <div class="col-3 col-sm-auto mt-3">
-          <button type="button" class="form-control input" id="" value="2" required
-            onclick="checkButton(this)"></button>
-        </div>
-      </div>
-      <div class="form-row justify-content-center">
-        <div class="col-3 col-sm-auto mt-3">
-          <button type="button" class="form-control input" id="" value="3" required
-            onclick="checkButton(this)"></button>
-        </div>
-      </div>
-      <div class="form-row justify-content-center mt-2">
-        <div class="col-auto"><button id="next" type="button" class="form-control btn btn-secondary"
-            onclick="nextButton()">Далее</button>
-        </div>
-      </div>
-    </form>
-  </div>
+      <form id="startTest">
+         <div class="form-row justify-content-center mt-4">
+            <div id="mode"
+                 class="col-auto nav alert alert alert-primary justify-content-center info">Выберите тест
+            </div>
+         </div>
 
-  <script src="js/main.js"></script>
+         <div class="form-row justify-content-center mt-3">
+            <div class="col-auto nav justify-content-center">
+               <button value="0"
+                       type="button"
+                       class="form-control btn btn-secondary"
+                       onclick="chooseTest(value)">страны
+               </button>
+            </div>
+         </div>
+         <div class="form-row justify-content-center mt-3">
+            <div class="col-auto nav justify-content-center">
+               <button value="1"
+                       type="button"
+                       class="form-control btn btn-secondary"
+                       onclick="chooseTest(value)">регионы России
+               </button>
+            </div>
+         </div>
+
+         <div class="form-row justify-content-center mt-3">
+            <div class="col-auto nav justify-content-center">
+               <button value="2"
+                       type="button"
+                       class="form-control btn btn-secondary"
+                       onclick="chooseTest(value)">штаты США
+               </button>
+            </div>
+         </div>
+
+      </form>
+
+      <form id="startMode">
+         <div class="form-row justify-content-center mt-4">
+            <div id="mode"
+                 class="col-auto nav alert alert alert-primary justify-content-center info">Выберите режим
+            </div>
+         </div>
+
+         <div class="form-row justify-content-center mt-4">
+            <div class="col-auto nav justify-content-center">
+               <button value="0"
+                       type="button"
+                       class="form-control btn btn-secondary"
+                       onclick="chooseMode(value)">регион
+               </button>
+            </div>
+            <div class="col-auto nav justify-content-center">
+               <button value="1"
+                       type="button"
+                       class="form-control btn btn-secondary"
+                       onclick="chooseMode(value)">столица
+               </button>
+            </div>
+         </div>
+      </form>
+
+      <form id="result">
+         <div class="form-row justify-content-center mt-4">
+            <div id="res1"
+                 class="col-auto nav alert alert-success justify-content-center info">
+            </div>
+         </div>
+         <div class="form-row justify-content-center mt-1">
+            <div id="res2"
+                 class="col-auto nav alert alert-danger justify-content-center info">
+            </div>
+         </div>
+         <div class="form-row justify-content-center mt-1">
+            <div id="res3"
+                 class="col-auto nav alert alert-dark justify-content-center info">Всего:
+            </div>
+         </div>
+
+
+         <div class="form-row justify-content-center mt-4">
+            <div class="col-auto nav justify-content-center">
+               <button id="correct"
+                       type="button"
+                       class="form-control btn btn-secondary"
+                       onclick="correctErrors()">Исправить
+               </button>
+            </div>
+            <div class="col-auto nav justify-content-center">
+               <button id="start"
+                       type="button"
+                       class="form-control btn btn-secondary"
+                       onclick="startNew()">C начала
+               </button>
+            </div>
+         </div>
+      </form>
+
+      <form id="main">
+         <div class="form-row justify-content-center mt-4">
+            <div id="country"
+                 class="col-auto nav alert alert-primary nav justify-content-center">
+            </div>
+         </div>
+         <div class="form-row justify-content-center mt-1">
+            <div id="count"
+                 class="col-auto nav alert alert-primary nav justify-content-center">
+            </div>
+         </div>
+         <div class="form-row justify-content-center mt-2">
+            <div class="col-auto nav mt-3">
+               <button type="button"
+                       class="form-control input"
+                       value="0"
+                       onclick="checkButton(this)">
+               </button>
+            </div>
+         </div>
+         <div class="form-row justify-content-center">
+            <div class="col-auto nav mt-3">
+               <button type="button"
+                       class="form-control input"
+                       value="1"
+                       onclick="checkButton(this)">
+               </button>
+            </div>
+         </div>
+         <div class="form-row justify-content-center">
+            <div class="col-auto nav mt-3">
+               <button type="button"
+                       class="form-control input"
+                       value="2"
+                       onclick="checkButton(this)">
+               </button>
+            </div>
+         </div>
+         <div class="form-row justify-content-center">
+            <div class="col-auto nav mt-3">
+               <button type="button"
+                       class="form-control input"
+                       value="3"
+                       onclick="checkButton(this)">
+               </button>
+            </div>
+         </div>
+         <div class="form-row justify-content-center mt-2">
+            <div class="col-auto nav ">
+               <button id="next"
+                       type="button"
+                       class="form-control btn btn-secondary"
+                       onclick="nextButton()">Далее
+               </button>
+            </div>
+         </div>
+      </form>
+   </div>
+
+   <script src="js/main.js"></script>
 </body>
 
 </html>
