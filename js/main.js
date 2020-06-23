@@ -1,13 +1,13 @@
-randomCountryPos = 0;
-activeQuestCard = [];
-randomCountryIndex = 0;
-errors = [];
-countries = [];
-countriesLength = 0;
-mode = 0;
-test = 0;
-countCard = 0;
-testData = [
+let randomCountryPos = 0;
+let activeQuestCard = [];
+let randomCountryIndex = 0;
+let errors = [];
+let countries = [];
+let countriesLength = 0;
+let mode = 0;
+let test = 0;
+let countCard = 0;
+let testData = [
    [
       ['Андорра', 'Андорра-ла-Велья'],
       ['ОАЭ', 'Абу-Даби'],
@@ -351,24 +351,71 @@ testData = [
    ]
 ];
 
-country = document.querySelector('#country');
-capitals = document.querySelectorAll('.input');
-count = document.querySelector('#count');
-startTest = document.querySelector('#startTest');
-startMode = document.querySelector('#startMode');
-start = document.querySelector('#start');
-main = document.querySelector('#main');
-result = document.querySelector('#result');
-next = document.querySelector('#next');
-res1 = document.querySelector('#res1');
-res2 = document.querySelector('#res2');
-res3 = document.querySelector('#res3');
-correct = document.querySelector('#correct');
+let country = document.querySelector('#country');
+let capitals = document.querySelectorAll('.input');
+let count = document.querySelector('#count');
+let startTest = document.querySelector('#startTest');
+let startMode = document.querySelector('#startMode');
+let start = document.querySelector('#start');
+let main = document.querySelector('#main');
+let result = document.querySelector('#result');
+let next = document.querySelector('#next');
+let res1 = document.querySelector('#res1');
+let res2 = document.querySelector('#res2');
+let res3 = document.querySelector('#res3');
+let correct = document.querySelector('#correct');
+
+
+function setRandomCapitals(i) {
+   let randomCapital = Math.round(Math.random() * (testData[test].length - 1));
+   if (i === randomCountryPos) {
+      activeQuestCard[i] = countries[randomCountryIndex];
+   } else {
+      if ((activeQuestCard.includes(randomCapital) === true) ||
+         randomCapital === countries[randomCountryIndex]) {
+         setRandomCapitals(i);
+      } else {
+         activeQuestCard[i] = randomCapital;
+      }
+   }
+}
+
+function startCard() {
+   count.innerHTML = (countCard + 1) + '  из  ' + countriesLength;
+   countCard += 1;
+   next.style.display = 'none';
+   randomCountryPos = Math.round(Math.random() * 3);
+   randomCountryIndex = (Math.round(Math.random() * (countries.length - 1)));
+   country.innerHTML = testData[test][countries[randomCountryIndex]][mode];
+   for (let i = 0; i < 4; i += 1) {
+      setRandomCapitals(i);
+      capitals[i].disabled = false;
+      capitals[i].className = "form-control input";
+      capitals[i].innerHTML = testData[test][activeQuestCard[i]][(-(mode - 1))];
+   }
+}
+
+function getFinalResult() {
+   next.style.display = 'none';
+   main.style.display = 'none';
+   result.style.display = 'block';
+   if (errors.length === 0) {
+      correct.style.display = 'none';
+   }
+   res1.innerHTML = 'Верно:     ' + (countriesLength - errors.length);
+   res2.innerHTML = 'Не верно:  ' + errors.length;
+   res3.innerHTML = 'Всего:     ' + countriesLength;
+}
+
+function startNew() {
+   location.reload();
+}
 
 chooseTest = function (value) {
    test = value;
-   for (let i = 0; i < testData[test].length; i++)
+   for (let i = 0; i < testData[test].length; i += 1) {
       countries.push(i);
+   }
    countriesLength = countries.length;
    startTest.style.display = 'none';
    startMode.style.display = 'block';
@@ -394,38 +441,18 @@ correctErrors = function () {
 };
 
 nextButton = function () {
-   if (countCard == countriesLength) setTimeout(() => getFinalResult(), 400);
-   else startCard();
+   if (countCard === countriesLength) {
+      setTimeout(() => getFinalResult(), 400);
+   } else {
+      startCard();
+   }
 };
 
-function startCard() {
-   count.innerHTML = (countCard + 1) + '  из  ' + countriesLength;
-   countCard++;
-   next.style.display = 'none';
-   randomCountryPos = Math.round(Math.random() * 3);
-   randomCountryIndex = (Math.round(Math.random() * (countries.length - 1)));
-   country.innerHTML = testData[test][countries[randomCountryIndex]][mode];
-   for (let i = 0; i < 4; i++) {
-      setRandomCapitals(i);
-      capitals[i].disabled = false;
-      capitals[i].className = "form-control input";
-      capitals[i].innerHTML = testData[test][activeQuestCard[i]][(-(mode - 1))];
-   }
-}
-
-function setRandomCapitals(i) {
-   let randomCapital = Math.round(Math.random() * (testData[test].length - 1));
-   if (i == randomCountryPos) activeQuestCard[i] = countries[randomCountryIndex];
-   else {
-      if ((activeQuestCard.includes(randomCapital) == true) || randomCapital == countries[randomCountryIndex]) setRandomCapitals(i);
-      else activeQuestCard[i] = randomCapital;
-   }
-}
-
 function checkInput(value) {
-   for (let i = 0; i < 4; i++)
+   for (let i = 0; i < 4; i += 1) {
       capitals[i].disabled = true;
-   if (value == randomCountryPos) {
+   }
+   if (value === randomCountryPos) {
       capitals[value].className = "form-control input is-valid";
    } else {
       capitals[randomCountryPos].className = "form-control input is-valid";
@@ -434,18 +461,4 @@ function checkInput(value) {
    }
    countries.splice(randomCountryIndex, 1);
    next.style.display = 'block';
-}
-
-function getFinalResult() {
-   next.style.display = 'none';
-   main.style.display = 'none';
-   result.style.display = 'block';
-   if (errors.length == 0) correct.style.display = 'none';
-   res1.innerHTML = 'Верно:     ' + (countriesLength - errors.length);
-   res2.innerHTML = 'Не верно:  ' + errors.length;
-   res3.innerHTML = 'Всего:     ' + countriesLength;
-}
-
-function startNew() {
-   location.reload();
 }
